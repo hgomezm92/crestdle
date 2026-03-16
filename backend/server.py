@@ -21,7 +21,7 @@ Usage (production on Render):
 import os
 from flask import Flask, jsonify, send_from_directory, abort
 from flask_cors import CORS
-import database
+from backend import database
 
 # ════════════════════════════════════════════════════════════════
 # 1. APP SETUP
