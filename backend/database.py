@@ -46,7 +46,7 @@ def get_all_teams():
 
     try:
         rows = conn.execute("""
-            SELECT id, api_id, name, country, league, colour1, colour2, crest_file
+            SELECT id, api_id, name, country, league, colour1, colour2, stadium, city, crest_file
             FROM teams
             ORDER BY league, name
         """).fetchall()
@@ -73,7 +73,7 @@ def get_random_team():
 
     try:
         row = conn.execute("""
-            SELECT id, api_id, name, country, league, colour1, colour2, crest_file
+            SELECT id, api_id, name, country, league, colour1, colour2, stadium, city, crest_file
             FROM teams
             ORDER BY RANDOM()
             LIMIT 1

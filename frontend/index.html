@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crestle — Guess the Crest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Loading screen ────────────────────────────────────────── -->
+  <div id="loadingScreen">
+    <div class="loading-logo">CRESTLE</div>
+    <div class="loading-bar"><div class="loading-fill" id="loadingFill"></div></div>
+    <div class="loading-text" id="loadingText">Loading teams...</div>
+  </div>
+
+  <!-- ── Main app (hidden until data loads) ────────────────────── -->
+  <div id="app" class="hidden">
+
+    <header>
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-main">CRESTLE</span>
+          <span class="logo-dot">·</span>
+          <span class="logo-sub">Guess the Crest</span>
+        </div>
+        <div class="stats-bar">
+          <div class="stat">
+            <span class="stat-value" id="statWins">0</span>
+            <span class="stat-label">Won</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-value" id="statStreak">0</span>
+            <span class="stat-label">Streak</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-value" id="statTotal">0</span>
+            <span class="stat-label">Played</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="game-card">
+
+        <!-- Crest display -->
+        <div class="crest-container">
+          <div class="crest-wrap" id="crestWrap">
+            <img id="crestImg" class="crest-img" src="" alt="Football club crest" />
+            <div class="crest-placeholder" id="crestPlaceholder">
+              <span class="placeholder-icon">⚔</span>
+              <span class="placeholder-text">No image</span>
+            </div>
+            <!-- Corner decorations -->
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
+          </div>
+        </div>
+
+        <!-- Attempt tracker -->
+        <div class="attempt-tracker">
+          <div class="attempt-label" id="attemptLabel">6 attempts remaining</div>
+          <div class="attempt-pips" id="attemptPips">
+            <div class="pip" id="pip-0"></div>
+            <div class="pip" id="pip-1"></div>
+            <div class="pip" id="pip-2"></div>
+            <div class="pip" id="pip-3"></div>
+            <div class="pip" id="pip-4"></div>
+            <div class="pip" id="pip-5"></div>
+          </div>
+        </div>
+
+        <!-- Hints revealed after each wrong guess -->
+        <div class="hints-list" id="hintsList"></div>
+
+        <!-- Wrong guesses history -->
+        <div class="guesses-list" id="guessesList"></div>
+
+        <!-- Result banner -->
+        <div class="result-banner" id="resultBanner">
+          <div class="result-verdict" id="resultVerdict"></div>
+          <div class="result-meta" id="resultMeta"></div>
+          <div class="result-team" id="resultTeam"></div>
+          <button class="next-btn" id="nextBtn" onclick="nextRound()">
+            <span>Next Crest</span>
+            <span class="next-arrow">→</span>
+          </button>
+        </div>
+
+        <!-- Input area -->
+        <div class="input-area" id="inputArea">
+          <div class="input-wrap">
+            <input
+              type="text"
+              id="guessInput"
+              class="guess-input"
+              placeholder="Type a club name..."
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <button class="guess-btn" id="guessBtn" onclick="submitGuess()">
+              <span>→</span>
+            </button>
+            <div class="autocomplete-list" id="autocompleteList"></div>
+          </div>
+        </div>
+
+      </div><!-- /.game-card -->
+    </main>
+
+  </div><!-- /#app -->
+
+  <script src="game.js"></script>
+</body>
+</html>

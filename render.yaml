@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: crestle
+    runtime: python
+    rootDir: .
+    buildCommand: pip install -r requirements.txt
+    # gunicorn flags:
+    #   -w 2        → 2 worker processes (enough for free tier)
+    #   -b 0.0.0.0:$PORT → bind to the port Render assigns via env variable
+    #   backend.server:app → module path to the Flask app object
+    startCommand: gunicorn -w 2 -b 0.0.0.0:$PORT backend.server:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0

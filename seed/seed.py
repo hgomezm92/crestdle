@@ -85,6 +85,8 @@ def init_db(conn):
             league     TEXT    NOT NULL,
             colour1    TEXT,
             colour2    TEXT,
+            stadium    TEXT,
+            city       TEXT,
             crest_file TEXT
         )
     """)
@@ -144,6 +146,8 @@ def fetch_teams_for_league(league_name):
             'league':    league_name.replace('_', ' '),
             'colour1':   t.get('strColour1', ''),
             'colour2':   t.get('strColour2', ''),
+            'stadium':   t.get('strStadium', ''),
+            'city':      t.get('strLocation', '').split(',')[0].strip(),
             'badge_url': t['strBadge'],
         })
 
@@ -247,9 +251,9 @@ def save_team(conn, team, crest_file):
     """
     conn.execute("""
         INSERT OR IGNORE INTO teams
-            (api_id, name, country, league, colour1, colour2, crest_file)
+            (api_id, name, country, league, colour1, colour2, stadium, city, crest_file)
         VALUES
-            (:api_id, :name, :country, :league, :colour1, :colour2, :crest_file)
+            (:api_id, :name, :country, :league, :colour1, :colour2, :stadium, :city, :crest_file)
     """, {**team, 'crest_file': crest_file})
 
 
