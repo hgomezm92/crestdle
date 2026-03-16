@@ -29,12 +29,13 @@ from backend import database
 
 app = Flask(__name__)
 
-# CORS allows the frontend (on a different origin, e.g. Netlify)
-# to call this API. Without this, browsers would block the requests.
-# In production you should restrict origins to your actual frontend URL:
-#   CORS(app, origins=['https://crestle.netlify.app'])
-# For development we allow all origins.
-CORS(app)
+# Allowed origins — add your Netlify URL here.
+# localhost is kept for local development.
+CORS(app, origins=[
+    'http://localhost:8000',
+    'http://127.0.0.1:5500',
+    'https://crestle.netlify.app',  # update with your actual Netlify URL
+])
 
 # Absolute path to the crests folder, relative to this file
 CRESTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'crests')

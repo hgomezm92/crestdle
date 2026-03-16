@@ -57,7 +57,7 @@ const CONFIG = {
    * Before deploying to Netlify, change this to your Render URL:
    *   e.g. 'https://crestle.onrender.com'
    */
-  API_BASE: 'http://localhost:5000',
+  API_BASE: 'https://crestle-7r0f.onrender.com',
 
   MAX_ATTEMPTS: 6,
 
