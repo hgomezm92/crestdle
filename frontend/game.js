@@ -256,6 +256,9 @@ function startRound() {
 
   renderPips();
   renderAttemptLabel();
+
+  // Auto-focus the input so the user can start typing immediately
+  $('guessInput').focus();
 }
 
 /**
@@ -297,6 +300,48 @@ function loadCrest(team) {
 /** Called by the "Next Crest" button. */
 function nextRound() {
   startRound();
+}
+
+/**
+ * Skip the current attempt — counts as a wrong guess.
+ * Reveals the next hint, reduces blur, and advances the attempt counter.
+ * If no attempts remain, ends the round as a loss.
+ *
+ * A skipped attempt is recorded as an empty string in state.guesses
+ * so the history stays consistent.
+ */
+function skipGuess() {
+  if (state.gameOver) return;
+
+  state.guesses.push('');  // empty string marks a skip
+  state.wrongCount++;
+
+  // Add a visual row showing the skip
+  const el = document.createElement('div');
+  el.className = 'guess-row skip';
+  el.innerHTML = '<span class="guess-x">—</span><span>Skipped</span>';
+  $('guessesList').appendChild(el);
+
+  // Reduce blur
+  const blurIdx = Math.min(state.wrongCount, CONFIG.BLUR_LEVELS.length - 1);
+  $('crestImg').style.filter = `blur(${CONFIG.BLUR_LEVELS[blurIdx]}px)`;
+
+  // Reveal next hint
+  appendHint(state.wrongCount - 1);
+  renderPips(false);
+
+  if (state.wrongCount >= CONFIG.MAX_ATTEMPTS) {
+    state.gameOver     = true;
+    state.stats.streak = 0;
+    state.stats.total++;
+    $('crestImg').style.filter = 'blur(0px)';
+    showResult(false);
+  } else {
+    $('guessInput').focus();
+  }
+
+  renderAttemptLabel();
+  renderStats();
 }
 
 
@@ -358,6 +403,9 @@ function submitGuess() {
       state.stats.total++;
       $('crestImg').style.filter = 'blur(0px)';
       showResult(false);
+    } else {
+      // Re-focus input after a wrong guess so the user can keep typing
+      $('guessInput').focus();
     }
   }
 
@@ -441,6 +489,7 @@ function renderAttemptLabel() {
 function showResult(won) {
   $('inputArea').style.display = 'none';
   $('guessBtn').disabled = true;
+  $('skipBtn').disabled  = true;
 
   const attemptsTaken = state.wrongCount + (won ? 1 : 0);
   const metaText = won
@@ -511,7 +560,12 @@ guessInput.addEventListener('keydown', e => {
 
     case 'Enter':
       if (state.acIndex >= 0 && items[state.acIndex]) {
+        // Select the focused item
         guessInput.value = items[state.acIndex].dataset.name;
+        acList.classList.remove('open');
+      } else if (items.length === 1) {
+        // Auto-select when there's only one suggestion
+        guessInput.value = items[0].dataset.name;
         acList.classList.remove('open');
       }
       submitGuess();
@@ -549,5 +603,17 @@ document.addEventListener('click', e => {
 /* ════════════════════════════════════════════════════════════════
    9. BOOT
    ════════════════════════════════════════════════════════════════ */
+
+// Space or Enter on the result banner advances to the next round
+document.addEventListener('keydown', e => {
+  if (!state.gameOver) return;
+  if (e.key === ' ' || e.key === 'Enter') {
+    // Only if the input is not focused (avoid conflict with typing)
+    if (document.activeElement !== $('guessInput')) {
+      e.preventDefault();
+      nextRound();
+    }
+  }
+});
 
 init();

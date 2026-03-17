@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Favicon — shield emoji as inline SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
 </head>
 <body>
 
@@ -23,7 +25,7 @@
 
     <header>
       <div class="header-inner">
-        <div class="logo">
+        <div class="logo" onclick="window.location.reload()" title="Back to home" style="cursor:pointer">
           <span class="logo-main">CRESTLE</span>
           <span class="logo-dot">·</span>
           <span class="logo-sub">Guess the Crest</span>
