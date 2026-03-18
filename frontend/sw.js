@@ -9,7 +9,7 @@
    for API calls (so game data is always fresh when online).
    ════════════════════════════════════════════════════════════════ */
 
-const CACHE_NAME = 'crestle-v1';
+const CACHE_NAME = 'crestdle-v1';
 
 // Static assets to cache on install
 const STATIC_ASSETS = [

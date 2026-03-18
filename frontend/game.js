@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════════
-   game.js — Crestle
+   game.js — Crestdle
    Game logic. Sections:
      1.  Configuration
      2.  State
@@ -199,7 +199,7 @@ async function init() {
     renderStats();
 
   } catch (err) {
-    console.error('[Crestle] Failed to load teams:', err);
+    console.error('[Crestdle] Failed to load teams:', err);
     setLoadingProgress(100, 'Connection error — is the server running?');
   }
 }
@@ -294,7 +294,7 @@ function loadCrest(team) {
 
   imgEl.onerror = () => {
     // File missing or server error — keep placeholder
-    console.warn(`[Crestle] Could not load crest: ${team.crest_file}`);
+    console.warn(`[Crestdle] Could not load crest: ${team.crest_file}`);
   };
 
   imgEl.src = `${CONFIG.API_BASE}/crests/${team.crest_file}`;
@@ -618,8 +618,8 @@ document.addEventListener('click', e => {
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
-      .then(() => console.log('[Crestle] Service worker registered'))
-      .catch(err => console.warn('[Crestle] Service worker failed:', err));
+      .then(() => console.log('[Crestdle] Service worker registered'))
+      .catch(err => console.warn('[Crestdle] Service worker failed:', err));
   });
 }
 

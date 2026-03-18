@@ -1,10 +1,10 @@
-# Crestle 🛡️
+# Crestdle 🛡️
 
 **Guess the football club crest.**
 
 A daily-style guessing game — infinite mode. Each round you're shown a blurred crest that sharpens with every wrong guess. Five hints unlock progressively: country, league, colours, stadium, and city.
 
-**Play it → [crestle.netlify.app](https://crestle.netlify.app)**
+**Play it → [crestdle.netlify.app](https://crestdle.netlify.app)**
 
 ---
 
@@ -34,7 +34,7 @@ Each round:
 ## Project structure
 
 ```
-crestle/
+crestdle/
 ├── frontend/
 │   ├── index.html
 │   ├── style.css
@@ -42,7 +42,7 @@ crestle/
 ├── backend/
 │   ├── server.py      # Flask API
 │   ├── database.py    # SQLite access layer
-│   ├── crestle.db     # SQLite database
+│   ├── crestdle.db     # SQLite database
 │   └── crests/        # Downloaded crest images (PNG)
 ├── seed/
 │   └── seed.py        # Data extraction script
@@ -59,8 +59,8 @@ crestle/
 
 ```bash
 # Clone
-git clone https://github.com/tu-usuario/crestle.git
-cd crestle
+git clone https://github.com/tu-usuario/crestdle.git
+cd crestdle
 
 # Create and activate virtual environment
 python -m venv venv
@@ -105,7 +105,7 @@ python seed.py
 ## Feedback & bugs
 
 Found a bug or want to suggest a club or league?
-[Open an issue on GitHub](https://github.com/hgomezm92/crestle/issues)
+[Open an issue on GitHub](https://github.com/tu-usuario/crestdle/issues)
 
 ---
 

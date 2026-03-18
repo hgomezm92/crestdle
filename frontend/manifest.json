@@ -1,6 +1,6 @@
 {
-  "name": "Crestle",
-  "short_name": "Crestle",
+  "name": "Crestdle",
+  "short_name": "Crestdle",
   "description": "Guess the football club crest",
   "start_url": "/",
   "display": "standalone",

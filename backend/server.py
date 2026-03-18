@@ -1,5 +1,5 @@
 """
-server.py — Crestle
+server.py — Crestdle
 ════════════════════
 Flask API server. Exposes three endpoints:
 
@@ -34,7 +34,7 @@ app = Flask(__name__)
 CORS(app, origins=[
     'http://localhost:8000',
     'http://127.0.0.1:5500',
-    'https://crestle.netlify.app',  # update with your actual Netlify URL
+    'https://crestdle.netlify.app',  # update with your actual Netlify URL
 ])
 
 # Absolute path to the crests folder, relative to this file
