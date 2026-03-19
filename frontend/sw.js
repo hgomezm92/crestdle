@@ -60,18 +60,22 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Static assets — cache first, then network
+  // Static assets — cache first, then network.
+  // Only cache http/https requests — chrome-extension:// and others
+  // are not supported by the Cache API and would throw an error.
+  if (!url.protocol.startsWith('http')) return;
+
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
       return fetch(event.request).then(response => {
-        // Cache successful responses for static assets
+        // Only cache successful GET requests over http/https
         if (response.ok && event.request.method === 'GET') {
           const clone = response.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         }
         return response;
-      });
+      }).catch(() => cached); // return cached version if network fails
     })
   );
 });
