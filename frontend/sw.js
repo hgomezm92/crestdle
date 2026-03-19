@@ -75,7 +75,11 @@ self.addEventListener('fetch', event => {
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         }
         return response;
-      }).catch(() => cached); // return cached version if network fails
+      }).catch(() => {
+        // If network fails and nothing is cached, return a basic offline response
+        if (cached) return cached;
+        return new Response('Offline', { status: 503 });
+      });
     })
   );
 });
